@@ -32,6 +32,7 @@ def parse_args():
 def get_list(item, args):
     url = "{}/api/{}/".format(args.url, item)
 
+
     r = requests.get(url, headers=headers)
     logging.info("{} get request status code: {}".format(item, r.status_code))
     if r.status_code != 200:
