@@ -73,7 +73,7 @@ def main():
         logger.info("1) Find you token here {}/_/settings/api-token/".format(args.url))
         logger.info("2) export SQUAD_AUTH_TOKEN='Your token'")
         sys.exit(1)
-    auth_token = "\"Token " + auth_token + "\""
+    auth_token = "Token {}".format(auth_token)
     global headers
     headers = {"Authorization": auth_token}
     print headers
