@@ -75,7 +75,7 @@ def main():
         sys.exit(1)
     auth_token = "Token " + auth_token
     global headers
-    headers = {"Authorization": "\"" + auth_token + "\""}
+    headers = {"Authorization": auth_token}
 
     netrc_path = os.path.expanduser('~/.netrc')
     if os.path.exists(netrc_path):
