@@ -76,7 +76,7 @@ def main():
     auth_token = "Token {}".format(auth_token)
     global headers
     headers = {"Authorization": auth_token}
-    print headers
+    print headers[:55]
 
     netrc_path = os.path.expanduser('~/.netrc')
     if os.path.exists(netrc_path):
