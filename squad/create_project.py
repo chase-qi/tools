@@ -31,8 +31,6 @@ def parse_args():
 
 def get_list(item, args):
     url = "{}/api/{}/".format(args.url, item)
-    auth_token = os.environ.get("SQUAD_AUTH_TOKEN")
-    headers = {"Authorization": "Token {}".format(auth_token)}
 
     r = requests.get(url, headers=headers)
     logging.info("{} get request status code: {}".format(item, r.status_code))
@@ -52,8 +50,6 @@ def get_list(item, args):
 
 def creat_project(data, args):
     url = "{}/api/projects/".format(args.url)
-    auth_token = os.environ.get("SQUAD_AUTH_TOKEN")
-    headers = {"Authorization": "Token {}".format(auth_token)}
 
     r = requests.post(url, headers=headers, data=data)
     logging.info("Projects post request status code: {}".format(r.status_code))
@@ -69,12 +65,16 @@ def main():
     if args.logging == "DEBUG":
         logger.setLevel(logging.DEBUG)
 
+    global auth_token
     auth_token = os.environ.get("SQUAD_AUTH_TOKEN")
     if auth_token is None:
         logger.error("SQUAD_AUTH_TOKEN not provided in environment")
         logger.info("1) Find you token here {}/_/settings/api-token/".format(args.url))
         logger.info("2) export SQUAD_AUTH_TOKEN='Your token'")
         sys.exit(1)
+    auth_token = "Token " + auth_token
+    global headers
+    headers = {"Authorization": "\"" + auth_token + "\""}
 
     netrc_path = os.path.expanduser('~/.netrc')
     if os.path.exists(netrc_path):
